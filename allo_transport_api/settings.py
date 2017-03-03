@@ -106,7 +106,7 @@ WSGI_APPLICATION = 'allo_transport_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(os.path.dirname(PROJECT_DIR), 'db.sqlite3'),
+        'NAME': os.path.join(os.path.dirname(PROJECT_PATH), 'db.sqlite3'),
     }
 }
 
