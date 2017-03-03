@@ -14,6 +14,41 @@ var getUrlParameter = function getUrlParameter(sParam) {
     }
 };
 
+function renderAbout(){
+    var aboutpageids = [];
+    var about = 0 ;
+    $.getJSON("http://localhost:8000/api/v2/pages/?format=json", function (data) {
+        
+        for (var key in data.items){
+            if (data.items[key].meta.type == "allo_transport.AboutPage"){
+                aboutpageids.push(data.items[key].id);
+            }
+        }
+        aboutpageids.sort(function(a,b){
+            return b-a;
+        });
+        console.log(aboutpageids);
+
+        for (var id in aboutpageids){
+            about = aboutpageids[id];
+            break;
+        }
+
+        $.getJSON("http://localhost:8000/api/v2/pages/"+about+"/?format=json", function (page_data) {
+
+            var template = $('#template-about').html();
+            var rendered = Mustache.render(template, page_data);
+        
+            $('#about').html(rendered);
+
+        });
+
+    });
+
+
+
+}
+
 function renderNews(id){
 
     $.getJSON("http://localhost:8000/api/v2/pages/"+id+"/?format=json", function (page_data) {

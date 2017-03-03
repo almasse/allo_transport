@@ -6,11 +6,14 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, Inli
 from django.conf import settings
 
 
+
+
 class HomePage(Page):
     api_fields = ['partners', 'subpage_types']
 
     content_panels = Page.content_panels + [
         InlinePanel('partners', label="Partenaires"),
+
     ]
     subpage_types = ['allo_transport.NewsPage']
 
@@ -37,6 +40,30 @@ class Partner(Orderable):
     def photo_url(self):
         if self.photo:
             return settings.MEDIA_URL + 'original_images/' + self.photo.filename
+
+
+class AboutPage(Page):
+    body = RichTextField(blank=True)
+    photo = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    api_fields = ['body','photo','photo_url']
+
+    content_panels = Page.content_panels + [
+        FieldPanel('body'),
+        FieldPanel('photo'),
+    ]
+
+    @property
+    def photo_url(self):
+        if self.photo:
+            return settings.MEDIA_URL + 'original_images/' + self.photo.filename
+
 
 
 class NewsPage(Page):

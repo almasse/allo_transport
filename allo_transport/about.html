@@ -62,11 +62,11 @@
     
     <div class="container">
         <div class="row">
-            <div class="mbr-table-md-up">
+            <div class="mbr-table-md-up" id="about">
 
               
 
-              <div class="mbr-table-cell col-md-5 text-xs-center text-md-right content-size">
+          <!--    <div class="mbr-table-cell col-md-5 text-xs-center text-md-right content-size">
                   <h3 class="mbr-section-title display-2">A Propos&nbsp;</h3>
                   <div class="lead">
 
@@ -84,11 +84,25 @@
               <div class="mbr-table-cell mbr-left-padding-md-up mbr-valign-top col-md-7 image-size" style="width: 50%;">
                   <div class="mbr-figure"><img src="assets/images/desktop.jpg"></div>
               </div>
-
+-->
             </div>
         </div>
     </div>
+                <script id="template-about" type="x-tmpl-mustache">
+              <div class="mbr-table-cell col-md-5 text-xs-center text-md-right content-size">
+                  <h3 class="mbr-section-title display-2">{{title}}</h3>
+                  <div class="lead">
 
+                    <p>{{{body}}}</p>
+
+                  </div>
+  
+              </div>
+
+              <div class="mbr-table-cell mbr-left-padding-md-up mbr-valign-top col-md-7 image-size" style="width: 50%;">
+                  <div class="mbr-figure"><img src="http://localhost:8000{{ photo_url }}"></div>
+              </div>
+                </script>
 </section>
 
 <section class="mbr-section mbr-section-md-padding mbr-footer footer1" id="contacts1-1t" style="background-color: rgb(0, 71, 142); padding-top: 90px; padding-bottom: 90px;">
@@ -125,7 +139,18 @@ Fax: 418-679-0383</p>
   <script src="assets/viewportChecker/jquery.viewportchecker.js"></script>
   <script src="assets/theme/js/script.js"></script>
   
+    <script src="assets/custom/parsley.min.js"></script>
+  <script src="assets/custom/mustache.min.js"></script>
+  <script src="assets/custom/myapp.js"></script>
   
+ <script> 
+$(document).ready(function () {
+
+    renderAbout();
+
+
+});
+</script>
   <input name="animation" type="hidden">
    <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon"></i></a></div>
   </body>
