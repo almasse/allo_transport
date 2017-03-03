@@ -200,8 +200,8 @@
     <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(0, 71, 142);">
     </div>
 
-    <div class="mbr-cards-row row">
-        <div class="mbr-cards-col col-xs-12 col-lg-3" style="padding-top: 80px; padding-bottom: 80px;">
+    <div class="mbr-cards-row row" id="news">
+   <!--     <div class="mbr-cards-col col-xs-12 col-lg-3" style="padding-top: 80px; padding-bottom: 80px;">
             <div class="container">
               <div class="card cart-block">
                   <div class="card-img"><img src="assets/images/table.jpg" class="card-img-top"></div>
@@ -252,10 +252,29 @@
                     </div>
                 </div>
             </div>
-        </div>
-        
-        
+        </div>-->
+
     </div>
+
+                <script id="template-news" type="x-tmpl-mustache">
+                    
+                    <div class="mbr-cards-col col-xs-12 col-lg-3" style="padding-top: 80px; padding-bottom: 80px;">
+                        <div class="container">
+                            <div class="card cart-block">
+                                <div class="card-img"><img src="http://localhost:8000{{ photo_url }}" class="card-img-top"></div>
+                                <div class="card-block">
+                                    <h4 class="card-title">{{title}}</h4>
+                        
+                                    <p class="card-text">{{{apercu}}}</p>
+                                    <div class="card-btn"><a href="nouvelledetail.html?code={{id}}" class="btn btn-primary">PLUS</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                       
+                </script>
+
+
 </section>
 
 <section class="mbr-slider mbr-section mbr-section-nopadding carousel slide extTestimonials1 extTestimonials3 extTestimonials5" data-ride="carousel" data-keyboard="false" data-wrap="true" data-interval="5000" data-pause="false" id="extTestimonials5-d" style="background-color: rgb(255, 255, 255); padding-top: 40px; padding-bottom: 0px;">
@@ -386,7 +405,15 @@ Fax: 418-679-0383</p>
   <script src="assets/custom/mustache.min.js"></script>
   <script src="assets/custom/myapp.js"></script>
   
-  
+ <script> 
+$(document).ready(function () {
+
+    renderIndex();
+
+
+});
+</script>
+
   <input name="animation" type="hidden">
    <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon"></i></a></div>
   </body>
