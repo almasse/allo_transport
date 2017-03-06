@@ -79,9 +79,9 @@ function renderIndex(){
         rendered = Mustache.render(template, page_data);
         $('#index-blue-body').html(rendered);
 
-        $.getJSON("http://localhost:8000/api/v2/pages/4/?format=json", function (data) {
-            $('#carousel-item-list').eq(0).addClass('active');
-        });
+
+        $('#carousel-item-list').eq(0).addClass('active');
+
 
     });
     $.getJSON("http://localhost:8000/api/v2/pages/?format=json", function (data) {
