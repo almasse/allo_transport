@@ -9,6 +9,8 @@ from django.conf import settings
 
 
 class HomePage(Page):
+    blue_body = RichTextField(blank=True)
+    blue_body_title = models.CharField(max_length=150,blank=True)
     body = RichTextField(blank=True)
     body_title = models.CharField(max_length=150,blank=True)
     photo = models.ForeignKey(
@@ -19,12 +21,14 @@ class HomePage(Page):
         related_name='+'
     )
 
-    api_fields = ['partners', 'subpage_types','body','photo','photo_url','body_title']
+    api_fields = ['partners', 'subpage_types','body','photo','photo_url','body_title','blue_body_title','blue_body']
 
     content_panels = Page.content_panels + [
-        FieldPanel('body'),
-        FieldPanel('photo'),
+        FieldPanel('blue_body_title'),
+        FieldPanel('blue_body'),
         FieldPanel('body_title'),
+        FieldPanel('photo'),
+        FieldPanel('body'),
         InlinePanel('partners', label="Partenaires"),
 
 

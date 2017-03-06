@@ -151,14 +151,18 @@
     
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-xs-center">
-                <h3 class="mbr-section-title display-2">Transport en commun</h3>
-                <div class="lead"><p>Article header with background image and parallax effect.</p></div>
+            <div class="col-md-8 col-md-offset-2 text-xs-center" id="index-blue-body">
+
                 
             </div>
         </div>
     </div>
-
+                <script id="template-index-blue-body" type="x-tmpl-mustache">
+                    
+                    <h3 class="mbr-section-title display-2">{{blue_body_title}}</h3>
+                    <div class="lead"><p>{{{blue_body}}}</p></div>
+                                      
+                </script>
 </section>
 
 <section class="mbr-section" id="msg-box5-2b" style="background-color: rgb(255, 255, 255); padding-top: 80px; padding-bottom: 80px;">
@@ -334,7 +338,7 @@
             <!-- template start here -->
                 <script id="template-partners" type="x-tmpl-mustache">
                     {{#partners}}
-                    <div class="carousel-item active">
+                    <div class="carousel-item" id="carousel-item-list">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="wrap-img"><a href="{{ url }}"><img src="http://localhost:8000{{ photo_url }}"></a></div>
