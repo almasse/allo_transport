@@ -166,33 +166,29 @@
     
     <div class="container">
         <div class="row">
-            <div class="mbr-table-md-up">
+            <div class="mbr-table-md-up" id="index-body">
 
               
 
-              <div class="mbr-table-cell col-md-5 text-xs-center text-md-right content-size">
-                  <h3 class="mbr-section-title display-2">Stationnement incitatif</h3>
-                  <div class="lead">
-
-                    <p>Solid color intro with an image on the right side. Also this block has no paddings.</p>
-
-                  </div>
-
-                  
-              </div>
-
-
-              
-
-
-              <div class="mbr-table-cell mbr-left-padding-md-up mbr-valign-top col-md-7 image-size" style="width: 50%;">
-                  <div class="mbr-figure"><img src="assets/images/desktop.jpg"></div>
-              </div>
 
             </div>
         </div>
     </div>
+                <script id="template-index-body" type="x-tmpl-mustache">
+                    
+                    <div class="mbr-table-cell col-md-5 text-xs-center text-md-right content-size">
+                        <h3 class="mbr-section-title display-2">{{body_title}}</h3>
+                        <div class="lead">
 
+                            <p>{{{body}}}</p>
+
+                        </div>                
+                    </div>
+                    <div class="mbr-table-cell mbr-left-padding-md-up mbr-valign-top col-md-7 image-size" style="width: 50%;">
+                        <div class="mbr-figure"><img src="http://localhost:8000{{ photo_url }}"></div>
+                    </div>
+                                      
+                </script>
 </section>
 
 <section class="mbr-cards mbr-section mbr-section-nopadding mbr-parallax-background" id="features3-m" style="background-image: url(assets/images/adobestock-2000x1388.png);">

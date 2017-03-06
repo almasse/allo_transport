@@ -69,8 +69,11 @@ function renderIndex(){
 
         var template = $('#template-partners').html();
         var rendered = Mustache.render(template, page_data);
-        
         $('#partners').html(rendered);
+
+        template = $('#template-index-body').html();
+        rendered = Mustache.render(template, page_data);
+        $('#index-body').html(rendered);
 
     });
     $.getJSON("http://localhost:8000/api/v2/pages/?format=json", function (data) {

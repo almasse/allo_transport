@@ -9,13 +9,32 @@ from django.conf import settings
 
 
 class HomePage(Page):
-    api_fields = ['partners', 'subpage_types']
+    body = RichTextField(blank=True)
+    body_title = models.CharField(max_length=150,blank=True)
+    photo = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    api_fields = ['partners', 'subpage_types','body','photo','photo_url','body_title']
 
     content_panels = Page.content_panels + [
+        FieldPanel('body'),
+        FieldPanel('photo'),
+        FieldPanel('body_title'),
         InlinePanel('partners', label="Partenaires"),
+
 
     ]
     subpage_types = ['allo_transport.NewsPage']
+    @property
+    def photo_url(self):
+        if self.photo:
+            return settings.MEDIA_URL + 'original_images/' + self.photo.filename
+
 
 
 class Partner(Orderable):
