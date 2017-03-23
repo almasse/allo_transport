@@ -28,7 +28,7 @@ SECRET_KEY = '4^9pw^ym9z6wu$uo-un97!_75acg6c=if1lr_ta)wsa8+n89w^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.99','*','localhost']
 
 
 # Application definition
@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'wagtail.wagtailsearch',
     'wagtail.wagtailadmin',
     'wagtail.wagtailcore',
-
+    'wagtail.contrib.modeladmin',
+    'wagtailmenus',
     'modelcluster',
     'taggit',
 
@@ -60,12 +61,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'allo_transport',
+    #'debug_toolbar',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -74,9 +77,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-
+    
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'allo_transport_api.urls'
@@ -84,7 +88,9 @@ ROOT_URLCONF = 'allo_transport_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(PROJECT_PATH, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -92,6 +98,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'wagtailmenus.context_processors.wagtailmenus',
             ],
         },
     },
@@ -109,6 +116,8 @@ DATABASES = {
         'NAME': os.path.join(os.path.dirname(PROJECT_PATH), 'db.sqlite3'),
     }
 }
+
+
 
 
 # Internationalization
@@ -142,6 +151,8 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(os.path.dirname(PROJECT_DIR), 'media')
 MEDIA_URL = '/media/'
+
+INTERNAL_IPS =['127.0.0.1','*','localhost','192.168.1.99']
 
 
 # Wagtail settings

@@ -5,11 +5,11 @@ from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.rich_text import expand_db_html
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel
 from django.conf import settings
+from wagtailmenus.models import MenuPage
 
 
 
-
-class HomePage(Page):
+class HomePage(MenuPage):
     blue_body = RichTextField(blank=True)
     blue_body_title = models.CharField(max_length=150,blank=True)
     body = RichTextField(blank=True)
@@ -74,7 +74,7 @@ class Partner(Orderable):
             return settings.MEDIA_URL + 'original_images/' + self.photo.filename
 
 
-class AboutPage(Page):
+class AboutPage(MenuPage):
     body = RichTextField(blank=True)
     photo = models.ForeignKey(
         'wagtailimages.Image',
@@ -100,7 +100,7 @@ class AboutPage(Page):
         return expand_db_html(self.body)
 
 
-class NewsPage(Page):
+class NewsPage(MenuPage):
     body = RichTextField(blank=True)
     apercu = models.CharField(max_length=150,blank=True)
     photo = models.ForeignKey(

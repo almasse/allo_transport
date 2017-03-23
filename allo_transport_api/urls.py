@@ -10,13 +10,14 @@ from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 from wagtail.contrib.wagtailapi import urls as wagtailapi_urls
 from .api import api_router
-
+import allo_transport.urls
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 
 urlpatterns = [
     url(r'^django-admin/', include(admin.site.urls)),
+    url(r'^menus/', include(allo_transport.urls)),
 
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
@@ -29,8 +30,11 @@ urlpatterns = [
 if settings.DEBUG:
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    import debug_toolbar
 
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

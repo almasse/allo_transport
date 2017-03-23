@@ -14,7 +14,15 @@ var getUrlParameter = function getUrlParameter(sParam) {
     }
 };
 
+function renderMenu(){
+    $.get('http://localhost:8000/menus/menu/', function(menu){
+        $('#dynamic-menu').html(menu);
+    });
+}
+
+
 function renderAbout(){
+    renderMenu();
     var aboutpageids = [];
     var about = 0 ;
     $.getJSON("http://localhost:8000/api/v2/pages/?format=json", function (data) {
@@ -51,6 +59,7 @@ function renderAbout(){
 }
 
 function renderNews(slug){
+    renderMenu();
     var id;
     $.getJSON("http://localhost:8000/api/v2/pages/?format=json", function (data) {
         for (var key in data.items){
@@ -73,8 +82,11 @@ function renderNews(slug){
 
 }
 
-function renderIndex(){
 
+
+
+function renderIndex(){
+    renderMenu();
     var newspagesids = [];
     var latestsnewsids = [];
     $.getJSON("http://localhost:8000/api/v2/pages/4/?format=json", function (page_data) {
