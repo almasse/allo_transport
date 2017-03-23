@@ -35,6 +35,7 @@ function renderAbout(){
         }
 
         $.getJSON("http://localhost:8000/api/v2/pages/"+about+"/?format=json", function (page_data) {
+            page_data.body1 = page_data.body1.split('src=\"/media/').join('src="http://localhost:8000/media/');
 
             var template = $('#template-about').html();
             var rendered = Mustache.render(template, page_data);
@@ -49,16 +50,27 @@ function renderAbout(){
 
 }
 
-function renderNews(id){
+function renderNews(slug){
+    var id;
+    $.getJSON("http://localhost:8000/api/v2/pages/?format=json", function (data) {
+        for (var key in data.items){
+            if (data.items[key].meta.slug == slug){
+                id =data.items[key].id;
+            }
+        }
+        $.getJSON("http://localhost:8000/api/v2/pages/"+id+"/?format=json", function (page_data) {
+            page_data.body1 = page_data.body1.split('src=\"/media/').join('src="http://localhost:8000/media/');
 
-    $.getJSON("http://localhost:8000/api/v2/pages/"+id+"/?format=json", function (page_data) {
-
-        var template = $('#template-news').html();
-        var rendered = Mustache.render(template, page_data);
+            var template = $('#template-news').html();
+            var rendered = Mustache.render(template, page_data);
         
-        $('#news').html(rendered);
+            $('#news').html(rendered);
+
+        });
 
     });
+
+
 }
 
 function renderIndex(){
@@ -66,6 +78,9 @@ function renderIndex(){
     var newspagesids = [];
     var latestsnewsids = [];
     $.getJSON("http://localhost:8000/api/v2/pages/4/?format=json", function (page_data) {
+        page_data.body1 = page_data.body1.split('src=\"/media/').join('src="http://localhost:8000/media/');
+        page_data.body_title1 = page_data.body_title1.split('src=\"/media/').join('src="http://localhost:8000/media/');
+        page_data.blue_body1 = page_data.blue_body1.split('src=\"/media/').join('src="http://localhost:8000/media/');
 
         var template = $('#template-partners').html();
         var rendered = Mustache.render(template, page_data);
@@ -115,10 +130,6 @@ function renderIndex(){
                 $('#news').append(rendered);
             });
         }
-        //var template = $('#template-partners').html();
-        //var rendered = Mustache.render(template, page_data);
-        //console.log(rendered);
-        //$('#partners').html(rendered);
 
     });
 }

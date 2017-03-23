@@ -2,6 +2,7 @@ from django.db import models
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtailcore.rich_text import expand_db_html
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel
 from django.conf import settings
 
@@ -12,7 +13,7 @@ class HomePage(Page):
     blue_body = RichTextField(blank=True)
     blue_body_title = models.CharField(max_length=150,blank=True)
     body = RichTextField(blank=True)
-    body_title = models.CharField(max_length=150,blank=True)
+    body_title = RichTextField(blank=True)
     photo = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -21,7 +22,7 @@ class HomePage(Page):
         related_name='+'
     )
 
-    api_fields = ['partners', 'subpage_types','body','photo','photo_url','body_title','blue_body_title','blue_body']
+    api_fields = ['partners', 'subpage_types','body','photo','photo_url','body_title','blue_body_title','blue_body','body1','blue_body1','body_title1']
 
     content_panels = Page.content_panels + [
         FieldPanel('blue_body_title'),
@@ -39,6 +40,14 @@ class HomePage(Page):
         if self.photo:
             return settings.MEDIA_URL + 'original_images/' + self.photo.filename
 
+    def body1(self):
+        return expand_db_html(self.body)
+
+    def blue_body1(self):
+        return expand_db_html(self.blue_body)
+
+    def body_title1(self):
+        return expand_db_html(self.body_title)
 
 
 class Partner(Orderable):
@@ -75,7 +84,7 @@ class AboutPage(Page):
         related_name='+'
     )
 
-    api_fields = ['body','photo','photo_url']
+    api_fields = ['body','photo','photo_url','body1']
 
     content_panels = Page.content_panels + [
         FieldPanel('body'),
@@ -87,6 +96,8 @@ class AboutPage(Page):
         if self.photo:
             return settings.MEDIA_URL + 'original_images/' + self.photo.filename
 
+    def body1(self):
+        return expand_db_html(self.body)
 
 
 class NewsPage(Page):
@@ -100,7 +111,7 @@ class NewsPage(Page):
         related_name='+'
     )
 
-    api_fields = ['body','photo','photo_url','apercu']
+    api_fields = ['body','photo','photo_url','apercu','body1']
     
 
 
@@ -117,6 +128,10 @@ class NewsPage(Page):
     def photo_url(self):
         if self.photo:
             return settings.MEDIA_URL + 'original_images/' + self.photo.filename
+
+    def body1(self):
+        return expand_db_html(self.body)
+
 
 """
 class Photo(Orderable):
