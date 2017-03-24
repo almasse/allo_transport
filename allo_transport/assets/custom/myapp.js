@@ -15,8 +15,20 @@ var getUrlParameter = function getUrlParameter(sParam) {
 };
 
 function renderMenu(){
-    $.get('http://localhost:8000/menus/menu/', function(menu){
-        $('#dynamic-menu').html(menu);
+    $.when(
+        $.get('http://localhost:8000/menus/menu/', function(menu){
+            $('#dynamic-menu').html(menu);
+        })
+    ).done(function(){
+        $('#dynamic-menu a').each(function(){
+            console.log($(this).attr('href'));
+            var arr = $(this).attr('href').split("/");
+            console.log(arr);
+            var slug = arr[arr.length-2];
+            console.log(slug);
+            this.getAttribute('href') = "#";
+            console.log($(this).attr('href'));
+        });
     });
 }
 
